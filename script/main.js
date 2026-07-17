@@ -1,6 +1,6 @@
-  // Optimized particle creation
-  function createParticles() {
-    const emojis = ['❤️', '🌎', '🌠', '💝', '🌟', '💞'];
+// Optimized particle creation
+function createParticles() {
+    const emojis = ['❤️', '🍓', '🍓', '🍓', '🍓', '💞'];
     const container = document.body;
     let lastTime = 0;
 
@@ -30,7 +30,7 @@ function showNextMessage() {
         if (currentMessage > 0) {
             messages[currentMessage - 1].classList.add('exit');
         }
-        
+
         if (currentMessage < messages.length) {
             messages[currentMessage].classList.add('active');
             currentMessage++;
@@ -43,7 +43,7 @@ function showNextMessage() {
 }
 
 // Button interactions
-document.querySelector('.yes-btn').addEventListener('click', function() {
+document.querySelector('.yes-btn').addEventListener('click', function () {
     const celebration = document.querySelector('.celebration');
     celebration.style.display = 'block';
 
@@ -60,15 +60,18 @@ document.querySelector('.yes-btn').addEventListener('click', function() {
         }
     });
 
-    finalQuestion.innerHTML = 
-        "<h2>🎉 I know you're my baby boo 💝</h2>" +
-        "<p>You've made my heart explode with joy!</p>" +
+    finalQuestion.innerHTML =
+        "<h2 lang='en'>🎉 I know you're my" +"<h2 lang='fa'> توت فرنگیییی 🍓❤️</h2>" +
+        "<p lang='en'>You've made my heart explode with joy!</p>" +
+        "<p lang='fa'>ماهگردمون مبارک باشه بوبووووو خیلی دوستت دارم❤️</p>" +
         "<div style='margin-top: 2rem; font-size: 3rem'>💞🌟</div>";
 });
 
-document.querySelector('.no-btn').addEventListener('mouseover', function() {
+document.querySelector('.no-btn').addEventListener('mouseover', function () {
+    const yesBtn = document.querySelector('.yes-btn');
+            yesBtn.classList.add('show');
     requestAnimationFrame(() => {
-        this.style.transform = 
+        this.style.transform =
             `translate(${Math.random() * 200 - 100}px, 
             ${Math.random() * 200 - 100}px)
             rotate(${Math.random() * 360}deg)`;
