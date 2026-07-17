@@ -22,18 +22,21 @@
 html {
     -webkit-tap-highlight-color: transparent;
     -webkit-overflow-scrolling: touch;
+    height: 100%;
+    width: 100%;
 }
 
 body {
     min-height: 100vh;
-    background: 
-        linear-gradient(45deg, 
-            #620080 25%, 
+    min-height: 100dvh; /* fixes mobile browser chrome resize jump */
+    width: 100%;
+    background:
+        linear-gradient(45deg,
+            #620080 25%,
             #8a2be2 75%);
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
     position: relative;
-    /* Hardware acceleration */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translateZ(0);
@@ -52,7 +55,7 @@ body::before {
 
 .love-particle {
     position: absolute;
-    font-size: 24px;
+    font-size: clamp(16px, 4vw, 24px);
     opacity: 0;
     animation: float 6s linear infinite;
     will-change: transform;
@@ -71,14 +74,18 @@ body::before {
     transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
-    width: 80%;
+    width: 90%;
     max-width: 800px;
+    padding: 0 0.5rem;
 }
 
 .message {
     opacity: 0;
     position: absolute;
-    font-size: 2.5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: clamp(1.25rem, 5.5vw, 2.5rem);
     font-weight: 500;
     line-height: 1.7;
     letter-spacing: 0.02em;
@@ -105,6 +112,17 @@ body::before {
     animation: reveal 1s forwards;
 }
 
+.final-question h2 {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+    padding: 0 0.5rem;
+}
+
+.final-question p {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+}
+
 @keyframes reveal {
     to {
         opacity: 1;
@@ -115,13 +133,16 @@ body::before {
 .btn-group {
     margin-top: 2rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+    position: relative;
+    min-height: 4rem; /* keeps layout stable once no-btn starts moving */
 }
 
 .valentine-btn {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
+    padding: clamp(0.7rem, 2.5vw, 1rem) clamp(1.2rem, 5vw, 2rem);
+    font-size: clamp(1rem, 4vw, 1.5rem);
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -129,6 +150,8 @@ body::before {
     position: relative;
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
+    touch-action: none; /* stops scroll/zoom gestures hijacking the dodge */
+    white-space: nowrap;
 }
 
 .yes-btn {
@@ -151,6 +174,8 @@ body::before {
 .no-btn {
     background: #7c5b7d;
     color: white;
+    position: relative;
+    z-index: 2;
 }
 
 .valentine-btn:hover {
@@ -189,7 +214,7 @@ body::before {
 
 .heart-burst {
     position: absolute;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 5vw, 2rem);
     animation: burst 1s ease-out forwards;
     will-change: transform;
 }
@@ -197,4 +222,14 @@ body::before {
 @keyframes burst {
     0% { transform: scale(0); opacity: 1; }
     100% { transform: scale(5); opacity: 0; }
+}
+
+/* Small-screen backstop */
+@media (max-width: 400px) {
+    .message-container {
+        width: 95%;
+    }
+    .btn-group {
+        gap: 0.75rem;
+    }
 }
